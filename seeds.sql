@@ -21,9 +21,9 @@ VALUES ("Sales Rep", 85000, 1),
 ("Receptionist", 65000, 7);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Pam", "Halpert", 1, 1),
+VALUES ("Micheal", "Scott", 10, NULL),
+("Pam", "Halpert", 1, 1),
 ("Jim", "Halpert", 1, 1),
-("Micheal", "Scott", 10),
 ("Dwight", "Schrute", 1, 1),
 ("Angela", "Martin", 7, 1),
 ("Kelly", "Kapoor", 4, 1),
