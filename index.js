@@ -1,32 +1,56 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2/promise");
-const Department = require("./src/department");
-const Employees = require("./src/employees");
-const Roles = require("./src/roles");
-const PORT = process.env.PORT || 3001;
+const departmentPrompt = require("./src/department");
+const employeePrompt = require("./src/employees");
+const rolesPrompt = require("./src/roles");
+const roleUpdatePrompt = require("./src/roleUpdate");
+// const PORT = process.env.PORT || 3001;
 
 let connection;
 
 initialize();
 main();
+// departmentPrompt();
 
-async function initialize(){
-    connection = await mysql.createConnection.apply({host:'localhost', user:'root', database: 'employeeTracker_db'})
+async function initialize() {
+    connection = await mysql.createConnection({ host: 'localhost', user: 'root', password: 'rootroot', database: 'employeeTracker_db' })
 };
 
 async function main() {
     const responseObject = await inquirer.prompt([
         {
             type: "list",
-            name: "home",
+            name: "option",
             message: "Choose an option:",
             choices: ["View All Departments", "View All Roles", "View All Employees", "Add a Department", "Add a Role", "Add an Employee", "Update an Employee Role"]
-        }, 
+        },
     ]);
     console.log(responseObject)
-
-const [rows] = await connections.execute('SELECT * FROM gfbhgvfd = ?' ,[responseObject.ghj]);
-console.table(rows);
+    if(responseObject.option === "View All Departments"){
+        const [rows] = await connection.execute('SELECT * FROM department');
+        console.table(rows);
+        main();
+    }else if(responseObject.option === "View All Roles"){
+        const [rows] = await connection.execute('SELECT * FROM role');
+        console.table(rows);
+        main();
+    }else if(responseObject.option === "View All Employees"){
+        const [rows] = await connection.execute('SELECT * FROM employee');
+        console.table(rows);
+        main();
+    }else if(responseObject.option === "Add a Department"){
+        const response = await departmentPrompt();
+        main();
+    }else if(responseObject.option === "Add a Role"){
+        const response = await rolesPrompt();
+        main();
+    }else if(responseObject.option === "Add an Employee"){
+        const response = await employeePrompt();
+        main();
+    }else if(responseObject.option === "Update an Employee Role"){
+        const response = await roleUpdatePrompt();
+        main();
+    }
 }
 
 // return inquirer 
