@@ -3,9 +3,10 @@ const inquirer = require("inquirer");
 return inquirer 
     .prompt ([
         {
-            type: "input",
+            type: "list",
             name: "name",
-            message: "Add role name",
+            message: "Which employee's role would you like to change?",
+            choices: ""
         },
         {
             type: "input",
@@ -19,4 +20,4 @@ return inquirer
         },   
     ])
 
-module.exports = Roles;
+module.exports = RoleUpdate;

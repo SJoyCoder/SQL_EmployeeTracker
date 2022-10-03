@@ -3,10 +3,25 @@ const inquirer = require("inquirer");
 return inquirer 
     .prompt ([
         {
-            type: "list",
-            name: "home",
-            message: "Choose an option:",
-        }, 
+            type: "input",
+            name: "firstName",
+            message: "Add employee's first name",
+        },
+        {
+            type: "input",
+            name: "lastName",
+            message: "Add employee's last name",
+        },
+        {
+            type: "input",
+            name: "role",
+            message: "Add employee's role",
+        },
+        {
+            type: "input",
+            name: "manager",
+            message: "Add employee's manager",
+        },    
     ])
 
 module.exports = Employees;
