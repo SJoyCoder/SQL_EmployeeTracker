@@ -41,8 +41,7 @@ async function main() {
     }else if(responseObject.option === "Add a Department"){
         const {name} = await departmentPrompt();
         const [rows] = await connection.execute(`INSERT INTO department (name)
-        VALUES (?)`, [{name}]);
-        console.table(rows);
+        VALUES (?)`, [name]);
 
         main();
 
