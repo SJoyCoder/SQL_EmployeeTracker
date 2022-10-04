@@ -5,10 +5,14 @@ function roleUpdatePrompt(){
     return inquirer 
         .prompt ([
             {
-                type: "list",
+                type: "input",
                 name: "name",
-                message: "Which employee's role would you like to change?",
-                choices: ""
+                message: "Which employee's role would you like to change?"
+            },
+            {
+                type: "input",
+                name: "role",
+                message: "Which role is the employee changing to?"
             },
             {
                 type: "input",

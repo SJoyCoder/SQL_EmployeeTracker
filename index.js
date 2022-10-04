@@ -39,10 +39,15 @@ async function main() {
         console.table(rows);
         main();
     }else if(responseObject.option === "Add a Department"){
-        const response = await departmentPrompt();
+        const {name} = await departmentPrompt();
+        const [rows] = await connection.execute(`INSERT INTO department (name)
+        VALUES (?)`, [{name}]);
+        console.table(rows);
+
         main();
+
     }else if(responseObject.option === "Add a Role"){
-        const response = await rolesPrompt();
+        const {salary, name, department} = await rolesPrompt();
         main();
     }else if(responseObject.option === "Add an Employee"){
         const response = await employeePrompt();
