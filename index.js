@@ -42,11 +42,14 @@ async function main() {
         const {name} = await departmentPrompt();
         const [rows] = await connection.execute(`INSERT INTO department (name)
         VALUES (?)`, [name]);
-
+        console.log("You have added the " + name + " department"); 
         main();
 
     }else if(responseObject.option === "Add a Role"){
-        const {salary, name, department} = await rolesPrompt();
+        const {title, salary, department_id} = await rolesPrompt();
+        const [rows] = await connection.execute(`INSERT INTO role (title, salary, department_id) 
+        VALUES (?, ?, ?)`, [title, salary, department_id]);
+        console.log("You have added the " + title + " role")
         main();
     }else if(responseObject.option === "Add an Employee"){
         const response = await employeePrompt();

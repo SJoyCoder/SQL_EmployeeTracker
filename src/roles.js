@@ -6,8 +6,8 @@ function rolesPrompt(){
         .prompt ([
             {
                 type: "input",
-                name: "name",
-                message: "Add role name",
+                name: "title",
+                message: "Add role title",
             },
             {
                 type: "input",
@@ -16,8 +16,8 @@ function rolesPrompt(){
             },
             {
                 type: "input",
-                name: "department",
-                message: "Add role department",
+                name: "department_id",
+                message: "Add role department id",
             },   
         ])
 }
