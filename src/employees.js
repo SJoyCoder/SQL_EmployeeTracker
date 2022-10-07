@@ -5,23 +5,23 @@ function employeePrompt() {
         .prompt ([
             {
                 type: "input",
-                name: "firstName",
+                name: "first_name",
                 message: "Add employee's first name",
             },
             {
                 type: "input",
-                name: "lastName",
+                name: "last_name",
                 message: "Add employee's last name",
             },
             {
                 type: "input",
-                name: "role",
-                message: "Add employee's role",
+                name: "role_id",
+                message: "Add employee's role id",
             },
             {
                 type: "input",
-                name: "manager",
-                message: "Add employee's manager",
+                name: "manager_id",
+                message: "Add employee's manager id",
             },    
         ])
 }
