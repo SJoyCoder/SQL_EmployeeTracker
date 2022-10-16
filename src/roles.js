@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
+const mysql = require("mysql2/promise");
 
-function rolesPrompt(){
+function rolesPrompt(departments){
 
     return inquirer 
         .prompt ([
@@ -15,9 +16,10 @@ function rolesPrompt(){
                 message: "Add role salary",
             },
             {
-                type: "input",
-                name: "department_id",
-                message: "Add role department id",
+                type: "list",
+                name: "department",
+                message: "Add role department",
+                choices: departments
             },   
         ])
 }
