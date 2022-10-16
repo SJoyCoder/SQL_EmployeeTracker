@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 
-function employeePrompt() {
+function employeePrompt(roles) {
     return inquirer 
         .prompt ([
             {
@@ -14,9 +14,10 @@ function employeePrompt() {
                 message: "Add employee's last name",
             },
             {
-                type: "input",
-                name: "role_id",
-                message: "Add employee's role id",
+                type: "list",
+                name: "role",
+                message: "What is the employee's role?",
+                choices: roles
             },
             {
                 type: "input",

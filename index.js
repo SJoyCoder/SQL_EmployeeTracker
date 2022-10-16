@@ -55,15 +55,21 @@ async function main() {
 
         const {title, salary, department} = await rolesPrompt(departments);
         const departmentId = await connection.execute(`SELECT id FROM department WHERE name = ?`, [department]);
-        console.log(departmentId[0][0].id);
         const [rows] = await connection.execute(`INSERT INTO role (title, salary, department_id) 
         VALUES (?, ?, ?)`, [title, salary, departmentId[0][0].id]);
         console.log("You have added the " + title + " role");
         main();
     }else if(responseObject.option === "Add an Employee"){
-        const {first_name, last_name, role_id, manager_id} = await employeePrompt();
+        const roles = [];
+        const roleList = await connection.execute('SELECT title FROM role');
+        for (let i = 0; i < roleList[0].length; i++) {
+       roles.push(`${roleList[0][i].title}`)
+        };
+
+        const {first_name, last_name, role, manager_id} = await employeePrompt(roles);
+        const roleId = await connection.execute(`SELECT id FROM role WHERE title =?`, [role]);
         const [rows] = await connection.execute(`INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-        VALUES (?, ?, ?, ?)`, [first_name, last_name, role_id, manager_id]);
+        VALUES (?, ?, ?, ?)`, [first_name, last_name, roleId[0][0].id, manager_id]);
         console.log("You have added " + first_name + " " + last_name + " to the employee list");
         main();
     }else if(responseObject.option === "Update an Employee Role"){
@@ -86,11 +92,8 @@ async function main() {
         };
 
         const {name, role} = await roleUpdatePrompt(names, roles, departments);
-console.log(name.split(" ")[1])
-        // const departmentId = await connection.execute(`SELECT id FROM department WHERE name =?`, [department]);
 
         const roleId = await connection.execute(`SELECT id FROM role WHERE title =?`, [role]);
-        console.log(roleId[0][0].id);
 
         const [rows] = await connection.execute(`UPDATE employee SET role_id = ? WHERE last_name =?`, [roleId[0][0].id, name.split(" ")[1]]);
         console.log("You have changed " + name + "'s role")
